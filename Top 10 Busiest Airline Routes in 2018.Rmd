@@ -1,0 +1,52 @@
+---
+title: "Tutorial 11 - Data Storytelling with Visualization"
+author: "Tey Yi Jie"
+date: "1/15/2022"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+# Data Preparation
+
+```{r}
+#Installing packages
+library(tidyverse)
+library(circlize)
+library(readxl)
+```
+
+```{r}
+#Getting data
+data <- read_excel("~/WQD7001/Data Storytelling/Data-Storytelling-with-Chord-Diagram/BusiestAirlines.xlsx")
+data
+```
+
+```{r}
+#Extract top 10
+ndata <- data %>% top_n(10)
+ndata
+```
+
+```{r}
+#Data transformation - Change passengers value to millions
+ndata$Passengers <- round(ndata$Passengers /1000000)
+ndata
+```
+# Data Visualization
+
+```{r}
+#Chord diagram
+chordDiagram(ndata)
+```
+
+# Data Storytelling
+The chord diagram shows the top 10 busiest airline routes in 2018. The great majority of the origins are Tokyo, Jeju, Sydney, Mumbai, Hanoi, Beijing, Hong Kong and Jakarta. Obviously, the most busiest aiport is Tokyo. It flies to 3 destinations which are Sapporo, Fukuoka and Naha. However, the most busiest airline route is from Jeju to Seoul. In addition, we can say that most of them are domestic flights. This might be due to the low fare of domestic flights if compared to international flights. 
+
+# References
+https://en.wikipedia.org/wiki/List_of_busiest_passenger_air_routes
+
+https://methods.sagepub.com/base/download/DatasetHowToGuide/chord-diagram-in-routesonline-2019
